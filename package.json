@@ -1,13 +1,13 @@
 {
-  "name": "helioslauncher",
+  "name": "dymensialauncher",
   "version": "1.8.0",
-  "productName": "Helios Launcher",
-  "description": "Modded Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/)",
+  "productName": "Dymensia Launcher",
+  "description": "Launcher Minecraft de Dymensia",
+  "author": "Daniel Scalzi (https://github.com/dscalzi/) & Zapto",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
+  "homepage": "https://launcher.dymensia.fr",
   "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
+    "url": "https://launcher.dymensia.fr/bug"
   },
   "private": true,
   "main": "index.js",
