@@ -1,13 +1,13 @@
 {
   "name": "dymensialauncher",
-  "version": "1.8.0",
+  "version": "1.0.0",
   "productName": "Dymensia Launcher",
   "description": "Launcher Minecraft de Dymensia",
   "author": "Daniel Scalzi (https://github.com/dscalzi/) & Zapto",
   "license": "UNLICENSED",
-  "homepage": "https://launcher.dymensia.fr",
+  "homepage": "https://github.com/Dymensia/DymensiaLauncher",
   "bugs": {
-    "url": "https://launcher.dymensia.fr/bug"
+    "url": "https://github.com/Dymensia/DymensiaLauncher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -48,6 +48,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
+    "url": "git+https://github.com/Dymensia/DymensiaLauncher.git"
   }
 }
