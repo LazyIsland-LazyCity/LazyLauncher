@@ -17,7 +17,11 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = 'En atten
         smallImageKey: genSettings.smallImageKey,
         smallImageText: genSettings.smallImageText,
         startTimestamp: new Date().getTime(),
-        instance: false
+        instance: false,
+        buttons: [
+            { label: "Rejoindre", url: "https://launcher.dymensia.fr/" },
+            { label: "Discord", url: "https://discord.gg/dBhx3kjtaJ" }
+        ]
     }
 
     client.on('ready', () => {
