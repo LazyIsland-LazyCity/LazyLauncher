@@ -6,7 +6,7 @@ const {Client} = require('discord-rpc')
 let client
 let activity
 
-exports.initRPC = function(genSettings, servSettings, initialDetails = 'En attente du client..'){
+exports.initRPC = function(genSettings, servSettings, initialDetails = 'En jeu'){
     client = new Client({ transport: 'ipc' })
 
     activity = {
@@ -16,7 +16,6 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = 'En atten
         largeImageText: servSettings.largeImageText,
         smallImageKey: genSettings.smallImageKey,
         smallImageText: genSettings.smallImageText,
-        startTimestamp: new Date().getTime(),
         instance: false,
         buttons: [
             { label: "Rejoindre", url: "https://launcher.dymensia.fr/" },

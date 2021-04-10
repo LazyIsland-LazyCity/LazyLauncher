@@ -537,27 +537,27 @@ function dlAsync(login = true){
                 case 'distribution':
                     setLaunchPercentage(20, 100)
                     loggerLaunchSuite.log('Validated distibution index.')
-                    setLaunchDetails('Loading version information..')
+                    setLaunchDetails('Chargement des informations de version..')
                     break
                 case 'version':
                     setLaunchPercentage(40, 100)
                     loggerLaunchSuite.log('Version data loaded.')
-                    setLaunchDetails('Validating asset integrity..')
+                    setLaunchDetails('Validation de l\'intégrité des assets..')
                     break
                 case 'assets':
                     setLaunchPercentage(60, 100)
                     loggerLaunchSuite.log('Asset Validation Complete')
-                    setLaunchDetails('Validating library integrity..')
+                    setLaunchDetails('Validation de l\'intégrité de la bibliothèque..')
                     break
                 case 'libraries':
                     setLaunchPercentage(80, 100)
                     loggerLaunchSuite.log('Library validation complete.')
-                    setLaunchDetails('Validating miscellaneous file integrity..')
+                    setLaunchDetails('Validation de l\'intégrité des fichiers divers..')
                     break
                 case 'files':
                     setLaunchPercentage(100, 100)
                     loggerLaunchSuite.log('File validation complete.')
-                    setLaunchDetails('Downloading files..')
+                    setLaunchDetails('Téléchargement de fichiers..')
                     break
             }
         } else if(m.context === 'progress'){

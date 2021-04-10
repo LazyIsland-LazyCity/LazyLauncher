@@ -415,12 +415,12 @@ function refreshAuthAccountSelected(uuid){
         const selBtn = val.getElementsByClassName('settingsAuthAccountSelect')[0]
         if(uuid === val.getAttribute('uuid')){
             selBtn.setAttribute('selected', '')
-            selBtn.innerHTML = 'Selected Account &#10004;'
+            selBtn.innerHTML = 'Compte sélectionné &#10004;'
         } else {
             if(selBtn.hasAttribute('selected')){
                 selBtn.removeAttribute('selected')
             }
-            selBtn.innerHTML = 'Select Account'
+            selBtn.innerHTML = 'Sélectionner un compte'
         }
     })
 }
