@@ -1585,7 +1585,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Set the status color of an enabled mod. */
 .settingsBaseMod[enabled] > .settingsModContent > .settingsModMainWrapper > .settingsModStatus {
-    background-color: rgb(165, 195, 37);
+    background-color: rgb(37, 195, 37);
 }
 
 /* Add opacity to submods of a disabled mod. */
