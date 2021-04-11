@@ -221,13 +221,20 @@ const refreshServerStatus = async function(fade = false){
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
 
     let pLabel = 'SERVEUR'
-    let pVal = 'HORS-LIGNE'
+    let pVal = 'N/A'
 
     try {
         const serverURL = new URL('my://' + serv.getAddress())
         const servStat = await ServerStatus.getStatus(serverURL.hostname, serverURL.port)
         if(servStat.online){
             pLabel = 'JOUEURS'
+            try {
+                DiscordWrapper.updateParty(servStat.onlinePlayers, servStat.maxPlayers)
+            } catch(err) {
+                
+            }
+
+            
             pVal = servStat.onlinePlayers + '/' + servStat.maxPlayers
         }
 
@@ -253,7 +260,7 @@ refreshMojangStatuses()
 
 // Set refresh rate to once every 5 minutes.
 let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
+let serverStatusListener = setInterval(() => refreshServerStatus(false), 60000)
 
 /**
  * Shows an error overlay, toggles off the launch area.
@@ -683,7 +690,7 @@ function dlAsync(login = true){
                     if(SERVER_JOINED_REGEX.test(data)){
                         DiscordWrapper.updateDetails('En train de jouer')
                     } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Sur le menu')
+                        DiscordWrapper.updateDetails('En train de jouer')
                     }
                 }
 
