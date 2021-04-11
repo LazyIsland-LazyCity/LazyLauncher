@@ -67,7 +67,7 @@ const statuses = [
 exports.statusToHex = function(status){
     switch(status.toLowerCase()){
         case 'green':
-            return '#25c325'
+            return '#a5c325'
         case 'yellow':
             return '#eac918'
         case 'red':
