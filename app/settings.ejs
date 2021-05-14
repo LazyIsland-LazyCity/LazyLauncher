@@ -7,10 +7,11 @@
             <div id="settingsNavItemsContainer">
                 <div id="settingsNavItemsContent">
                     <button class="settingsNavItem" rSc="settingsTabAccount" id="settingsNavAccount" selected>Compte</button>
-                    <button class="settingsNavItem" rSc="settingsTabMinecraft">Minecraft</button>
-                    <button class="settingsNavItem" rSc="settingsTabMods">Mods</button>
-                    <button class="settingsNavItem" rSc="settingsTabJava">Java</button>
                     <button class="settingsNavItem" rSc="settingsTabLauncher">Launcher</button>
+                    <div class="settingsNavSpacer"></div>
+                    <button class="settingsNavItem" rSc="settingsTabMinecraft">Minecraft</button>
+                    <button class="settingsNavItem" rSc="settingsTabMods">Modpack</button>
+                    <button class="settingsNavItem" rSc="settingsTabJava">Java</button>
                     <div class="settingsNavSpacer"></div>
                     <button class="settingsNavItem" rSc="settingsTabAbout">À propos</button>
                     <button class="settingsNavItem" rSc="settingsTabUpdate" id="settingsNavUpdate">Mises à jour</button>
@@ -30,7 +31,7 @@
             </div>
             <div id="settingsAddAccountContainer">
                 <button id="settingsAddAccount">
-                    <span id="settingsAddAccountText">&#43; Ajouter un compte</span>
+                    <span class="settingsAddAccountText">&#43; Ajouter un compte</span>
                 </button>
             </div>
             <div id="settingsCurrentAccountsHeader">
@@ -87,15 +88,26 @@
                     </label>
                 </div>
             </div>
+            <div class="settingsFieldContainer">
+                <div class="settingsFieldLeft">
+                    <span class="settingsFieldTitle">Ouvrir la console au lancement</span>
+                    <span class="settingsFieldDesc">Cela ouvre la Console DevTool au lancement, ce qui vous permet de visualiser la connexion du client en temps réel.</span>
+                </div>
+                <div class="settingsFieldRight">
+                    <label class="toggleSwitch">
+                        <input type="checkbox" cValue="ConsoleOnLaunch">
+                        <span class="toggleSwitchSlider"></span>
+                    </label>
+                </div>
+            </div>
         </div>
         <div id="settingsTabMods" class="settingsTab" style="display: none;">
             <div class="settingsTabHeader">
-                <span class="settingsTabHeaderText">Paramètres des mods</span>
-                <span class="settingsTabHeaderDesc">Activer ou désactiver les mods.</span>
+                <span class="settingsTabHeaderText">Paramètres du Modpack</span>
+                <span class="settingsTabHeaderDesc">Activez ou désactivez les mods et gérez d’autres éléments de votre modpack.</span>
             </div>
             <div id="settingsSelServContainer">
                 <div id="settingsSelServContent">
-
                 </div>
                 <div id="settingsSwitchServerContainer">
                     <div id="settingsSwitchServerContent">
@@ -117,13 +129,13 @@
                     </div>
                 </div>
                 <div id="settingsDropinModsContainer">
-                    <div class="settingsModsHeader">Déplacer des Mods</div>
+                    <div class="settingsModsHeader">Glisser des Mods</div>
                     <button id="settingsDropinFileSystemButton">+ Ajouter des Mods <span id="settingsDropinRefreshNote">(F5 pour Rafraîchir)</span></button>
                     <div id="settingsDropinModsContent">
                         
                     </div>
                 </div>
-                <div id="settingsShadersContainer">
+                <div id="settingsShaderpackContainer">
                     <div class="settingsModsHeader">Packs de Shaders</div>
                     <div id="settingsShaderpackDesc">Activer ou désactiver les shaders. Veuillez noter que les shaders ne fonctionneront correctement que sur des configurations puissantes. Vous pouvez ajouter des packs personnalisés ici.</div>
                     <div id="settingsShaderpackWrapper">
@@ -131,6 +143,19 @@
                         <div class="settingsSelectContainer">
                             <div class="settingsSelectSelected" id="settingsShadersSelected">Sélectionnez le packs de Shaders</div>
                             <div class="settingsSelectOptions" id="settingsShadersOptions" hidden>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="settingsResourcePackContainer">
+                    <div class="settingsModsHeader">Packs de Resources</div>
+                    <div id="settingsResourcePackDesc">Activer ou désactiver les packs de ressources. Veuillez noter que les packs de ressources à plus haute résolution ne fonctionneront que sur des configurations puissantes et nécessiteront plus de mémoire à allouer. Vous pouvez ajouter des packs personnalisés ici.</div>
+                    <div id="settingsResourcePackWrapper">
+                        <button id="settingsResourcePackButton"> + </button>
+                        <div class="settingsSelectContainer">
+                            <div class="settingsSelectSelected" id="settingsResourcePackSelected">Sélectionner un pack de ressources</div>
+                            <div class="settingsSelectOptions" id="settingsResourcePackOptions" hidden>
 
                             </div>
                         </div>
@@ -237,8 +262,8 @@
             </div>
             <!-- <div class="settingsFieldContainer">
                 <div class="settingsFieldLeft">
-                    <span class="settingsFieldTitle">Autoriser les mises à jour préliminaires.</span>
-                    <span class="settingsFieldDesc">Les pré-versions incluent de nouvelles fonctionnalités qui n'ont peut-être pas été entièrement testées ou intégrées.<br>Cela sera toujours vrai si vous utilisez une version préliminaire.</span>
+                    <span class="settingsFieldTitle">Allow Pre-Release Updates.</span>
+                    <span class="settingsFieldDesc">Pre-Releases include new features which may have not been fully tested or integrated.<br>This will always be true if you are using a pre-release version.</span>
                 </div>
                 <div class="settingsFieldRight">
                     <label class="toggleSwitch">
@@ -247,6 +272,18 @@
                     </label>
                 </div>
             </div> -->
+            <div class="settingsFieldContainer">
+                <div class="settingsFieldLeft">
+                    <span class="settingsFieldTitle">Activer l’intégration Discord</span>
+                    <span class="settingsFieldDesc">Cette option permettra au lanceur de contrôler votre présence sur Discord. Si vous fermez le lanceur à tout moment, cette fonctionnalité ne fonctionnera plus.</span>
+                </div>
+                <div class="settingsFieldRight">
+                    <label class="toggleSwitch">
+                        <input type="checkbox" cValue="DiscordIntegration">
+                        <span class="toggleSwitchSlider"></span>
+                    </label>
+                </div>
+            </div>
             <div class="settingsFileSelContainer">
                 <div class="settingsFileSelContent">
                     <div class="settingsFieldTitle" id="settingsDataDirTitle">Répertoire de données</div>
@@ -261,10 +298,24 @@
                             </svg>
                         </div>
                         <input class="settingsFileSelVal" type="text" value="null" cValue="DataDirectory" disabled>
+                        <button class="settingsFolderOpenButton" pathId="DataDirectory">Ouvrir</button>
                         <button class="settingsFileSelButton" dialogTitle="Select Data Directory" dialogDirectory="true">Choisir le dossier</button>
                     </div>
                 </div>
                 <div class="settingsFileSelDesc">Tous les fichiers du jeu et les installations Java locales seront stockés dans le répertoire de données.<br>Les captures d'écran et les sauvegardes du monde sont stockées dans le dossier d'instance pour la configuration de serveur correspondante.</div>
+            </div>
+            <div class="settingsServerCodeContainer" style="display: none;">
+                <div class="settingsServerCodesTitle">Your Server Codes</div>
+                <div class="settingsServerCodeContent">
+                    <div class="settingsServerCodeActions">
+                        <input class="settingsInputServerCodeVal" placeholder="Enter Code" type="text">
+                        <button class="settingsInputServerCodeButton" id="settingsAddServerCode">Add Code</button>
+                    </div>
+                </div>
+                <div id="settingsServerCodesListContent">
+
+                </div>
+                <div class="settingsServerCodesDesc">Specify server codes here to grant access to hidden servers that wouldn't be available to all users by default.</div>
             </div>
         </div>
         <div id="settingsTabAbout" class="settingsTab" style="display: none;">
@@ -294,7 +345,7 @@
                     <!-- The following must be included in third-party usage. -->
                     <a href="https://github.com/dscalzi/HeliosLauncher" id="settingsAboutSourceButton" class="settingsAboutButton">Source originale</a>
                     <a href="https://github.com/Dymensia/DymensiaLauncher/issues" id="settingsAboutSupportButton" class="settingsAboutButton">Support</a>
-                    <a href="#" id="settingsAboutDevToolsButton" class="settingsAboutButton">Activer la console</a>
+                    <a href="#" id="settingsAboutDevToolsButton" class="settingsAboutButton">Activer la console DevTools</a>
                 </div>
             </div>
             <div class="settingsChangelogContainer">

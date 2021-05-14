@@ -1,0 +1,19 @@
+{
+  "APP_DISPLAY_NAME": "Dymensia Launcher",
+
+  "WELCOME_HEADER_TEXT": "Bienvenue sur le launcher de Dymensia!",
+  "WELCOME_DESC_TEXT": "N/A",
+  "WELCOME_DESC_CTA": "N/A",
+
+  "WEBSITE_ENABLE": true,
+  "WEBSITE_URL": "https://launcher.dymensia.fr/",
+  "TWITTER_ENABLE": true,
+  "TWITTER_URL": "https://twitter.com/Dymensia_",
+  "INSTAGRAM_ENABLE": false,
+  "INSTAGRAM_URL": "#",
+  "YOUTUBE_ENABLE": false,
+  "YOUTUBE_URL": "#",
+  "DISCORD_ENABLE": true,
+  "DISCORD_URL": "https://discord.gg/dymensia"
+
+}

@@ -1,55 +1,31 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="modrealms logo"></p>
 
-<h1 align="center">Helios Launcher</h1>
+<h1 align="center">ModRealms Launcher</h1>
 
-<em><h5 align="center">(formerly Electron Launcher)</h5></em>
+<em><h5 align="center"><a href="https://github.com/dscalzi/HeliosLauncher">Modified from HeliosLauncher</a></h5></em>
 
-[<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/HeliosLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/dscalzi/HeliosLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
+<!-- [<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/HeliosLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/dscalzi/HeliosLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p> -->
 
-<p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
-
-![Screenshot 1](https://i.imgur.com/6o7SmH6.png)
-![Screenshot 2](https://i.imgur.com/x3B34n1.png)
-
-## Features
-
-* 🔒 Full account management.
-  * Add multiple accounts and easily switch between them.
-  * Credentials are never stored and transmitted directly to Mojang.
-* 📂 Efficient asset management.
-  * Receive client updates as soon as we release them.
-  * Files are validated before launch. Corrupt or incorrect files will be redownloaded.
-* ☕ **Automatic Java validation.**
-  * If you have an incompatible version of Java installed, we'll install the right one *for you*.
-  * You do not need to have Java installed to run the launcher.
-* 📰 News feed natively built into the launcher.
-* ⚙️ Intuitive settings management, including a Java control panel.
-* Supports all of our servers.
-  * Switch between server configurations with ease.
-  * View the player count of the selected server.
-* Automatic updates. That's right, the launcher updates itself.
-*  View the status of Mojang's services.
-
-This is not an exhaustive list. Download and install the launcher to gauge all it can do!
-
-#### Need Help? [Check the wiki.][wiki]
-
-#### Like the project? Leave a ⭐ star on the repository!
+<p align="center">Join ModRealms' servers easily and keep up to date with our packs and fixes!</p>
 
 ## Downloads
 
-You can download from [GitHub Releases](https://github.com/dscalzi/HeliosLauncher/releases)
+You can download from [GitHub Releases](https://github.com/ModRealms-Network/ModRealmsLauncher/releases)
+
+## Development (ModRealms fork)
+
+All ModRealms-specific changes (UI, assets, default configuration, etc...) will be in the master branch.
+
+A development branch __mr-features__ will be used to work on new additions to the core mechanics of the original project (as below) and will keep up to date with the original project. We may submit features from this branch as a PR to the original project.
+
 
 #### Latest Release
-
-[![](https://img.shields.io/github/release/dscalzi/HeliosLauncher.svg?style=flat-square)](https://github.com/dscalzi/HeliosLauncher/releases/latest)
-
-#### Latest Pre-Release
-[![](https://img.shields.io/github/release/dscalzi/HeliosLauncher/all.svg?style=flat-square)](https://github.com/dscalzi/HeliosLauncher/releases)
+Coming Soon!
+<!-- [![](https://img.shields.io/github/release/dscalzi/HeliosLauncher.svg?style=flat-square)](https://github.com/dscalzi/HeliosLauncher/releases/latest) -->
 
 **Supported Platforms**
 
-If you download from the [Releases](https://github.com/dscalzi/HeliosLauncher/releases) tab, select the installer for your system.
+If you download from the [Releases](https://github.com/ModRealms-Network/HeliosLauncher/releases) tab, select the installer for your system.
 
 | Platform | File |
 | -------- | ---- |
@@ -73,24 +49,27 @@ If you want to export the console output, simply right click anywhere on the con
 
 ![console example](https://i.imgur.com/T5e73jP.png)
 
+## Help
 
-## Development
+For help regarding this version (ModRealms' fork), contact the staff on the discord server below:
 
-This section details the setup of a basic developmentment environment.
+[![discord](https://discordapp.com/api/guilds/210739122577473536/embed.png?style=banner2)][discord]
 
-### Getting Started
 
-**System Requirements**
+## Original Authors
 
-* [Node.js][nodejs] v14
+This project is forked from HeliosLauncher, a project by dscalzi for the server WesterosCraft. Please visit and support their project at the links below!
 
----
+* [Project Link][original]
+* [Original Project Wiki][wiki]
+* [Aventium Softworks Discord][discord2]
 
-**Clone and Install Dependencies**
-
+[discord]: https://discord.gg/dymensia 'Discord Dymensia'
+[discord2]: https://discord.gg/zNWUXdt 'Original Project Discord'
+[original]: https://github.com/dscalzi/HeliosLauncher 'Original Project GitHub'
 ```console
-> git clone https://github.com/dscalzi/HeliosLauncher.git
-> cd HeliosLauncher
+> git clone https://github.com/ModRealms-Network/ModRealmsLauncher.git
+> cd ModRealmsLauncher
 > npm install
 ```
 
@@ -188,18 +167,6 @@ We reserve the right to update these conditions at any time, please check back p
 
 ---
 
-## Resources
-
-* [Wiki][wiki]
-* [Nebula (Create Distribution.json)][nebula]
-* [v2 Rewrite Branch (WIP)][v2branch]
-
-The best way to contact the developers is on Discord.
-
-[![discord](https://discordapp.com/api/guilds/211524927831015424/embed.png?style=banner3)][discord]
-
----
-
 ### See you ingame.
 
 
@@ -210,5 +177,3 @@ The best way to contact the developers is on Discord.
 [chromedebugger]: https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome 'Debugger for Chrome'
 [discord]: https://discord.gg/zNWUXdt 'Discord'
 [wiki]: https://github.com/dscalzi/HeliosLauncher/wiki 'wiki'
-[nebula]: https://github.com/dscalzi/Nebula 'dscalzi/Nebula'
-[v2branch]: https://github.com/dscalzi/HeliosLauncher/tree/ts-refactor 'v2 branch'
