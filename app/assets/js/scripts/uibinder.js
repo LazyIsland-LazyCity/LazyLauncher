@@ -36,7 +36,7 @@ let currentView
  * @param {*} onNextFade Optional. Callback function to execute when the next view
  * fades in.
  */
-function switchView(current, next, currentFadeTime = 500, nextFadeTime = 500, onCurrentFade = () => {}, onNextFade = () => {}){
+function switchView(current, next, currentFadeTime = 250, nextFadeTime = 250, onCurrentFade = () => {}, onNextFade = () => {}){
     currentView = next
     $(`${current}`).fadeOut(currentFadeTime, () => {
         onCurrentFade()
@@ -58,46 +58,64 @@ function getCurrentView(){
 function showMainUI(data){
 
     if(!isDev){
-        loggerAutoUpdater.log('Initializing..')
+        loggerAutoUpdater.log('Initializing...')
         ipcRenderer.send('autoUpdateAction', 'initAutoUpdater', ConfigManager.getAllowPrerelease())
     }
+
+    setTimeout(() => {
+        let loadingImage = document.getElementById('loadCenterImage')
+        loadingImage.setAttribute('inflation', '')
+        $('#loadingContainer').fadeOut(150, () => {
+            loadingImage.removeAttribute('class')
+            loadingImage.removeAttribute('inflation')
+        })
+    }, 0)
 
     prepareSettings(true)
     updateSelectedServer(data.getServer(ConfigManager.getSelectedServer()))
     refreshServerStatus()
+    loadDiscord()
     setTimeout(() => {
         document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-        document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
+        randomiseBackground()
         $('#main').show()
 
         const isLoggedIn = Object.keys(ConfigManager.getAuthAccounts()).length > 0
 
         // If this is enabled in a development environment we'll get ratelimited.
         // The relaunch frequency is usually far too high.
-        if(!isDev && isLoggedIn){
-            validateSelectedAccount()
-        }
+        validateSelectedAccount()
 
         if(ConfigManager.isFirstLaunch()){
             currentView = VIEWS.welcome
-            $(VIEWS.welcome).fadeIn(1000)
+            $(VIEWS.welcome).fadeIn(100)
+            if(hasRPC){
+                DiscordWrapper.updateDetails('Bienvenue.')
+                DiscordWrapper.updateState('Configuration du Launcher')
+            }
         } else {
             if(isLoggedIn){
                 currentView = VIEWS.landing
-                $(VIEWS.landing).fadeIn(1000)
+                $(VIEWS.landing).fadeIn(100)
+                if(hasRPC && !ConfigManager.isFirstLaunch()){
+                    if(ConfigManager.getSelectedServer()){
+                        const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+                        DiscordWrapper.updateDetails('Prêt à jouer!')
+                        DiscordWrapper.updateState('Serveur: ' + serv.getName())
+                    } else {
+                        DiscordWrapper.updateDetails('Écran d’accueil...')
+                    }
+                }
             } else {
                 currentView = VIEWS.login
-                $(VIEWS.login).fadeIn(1000)
+                $(VIEWS.login).fadeIn(100)
+                if(hasRPC){
+                    DiscordWrapper.updateDetails('Ajoute un compte...')
+                    DiscordWrapper.clearState()
+                }
             }
         }
-
-        setTimeout(() => {
-            $('#loadingContainer').fadeOut(500, () => {
-                $('#loadSpinnerImage').removeClass('rotating')
-            })
-        }, 250)
-        
-    }, 750)
+    }, 250)
     // Disable tabbing to the news container.
     initNews().then(() => {
         $('#newsContainer *').attr('tabindex', '-1')
@@ -106,18 +124,21 @@ function showMainUI(data){
 
 function showFatalStartupError(){
     setTimeout(() => {
-        $('#loadingContainer').fadeOut(250, () => {
+        $('#loadingContainer').fadeOut(150, () => {
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
-                'Fatal Error: Unable to Load Distribution Index',
-                'A connection could not be established to our servers to download the distribution index. No local copies were available to load. <br><br>The distribution index is an essential file which provides the latest server information. The launcher is unable to start without it. Ensure you are connected to the internet and relaunch the application.',
-                'Close'
+                'Erreur Fatale: Impossible de charger l’indice de distribution',
+                'Aucune connexion n’a pu être établie avec nos serveurs pour télécharger l’index de distribution. Aucune copie locale n’était disponible pour le chargement. <br><br>L’index de distribution est un fichier essentiel qui fournit les dernières informations du serveur. Le launcher ne peut pas démarrer sans. Assurez-vous d’être connecté à Internet et relancez l’application. <br><br>Il est très possible que le launcher ait mis à jour et changé l’emplacement du fichier d’index de distribution. Nous vous recommandons d’installer la dernière version du lanceur à partir de notre page de versions. <br><br>Si vous continuez à avoir des problèmes, veuillez nous contacter sur le serveur Discord Dymensia..',
+                'Télécharger la dernière version',
+                'Rejoindre notre Discord'
             )
             setOverlayHandler(() => {
-                const window = remote.getCurrentWindow()
-                window.close()
+                shell.openExternal('https://github.com/dymensia/DymensiaLauncher/releases')
             })
-            toggleOverlay(true)
+            setDismissHandler(() => {
+                shell.openExternal('https://discord.gg/dymensia')
+            })
+            toggleOverlay(true, true)
         })
     }, 750)
 }
@@ -302,17 +323,17 @@ function mergeModConfiguration(o, n, nReq = false){
     return n
 }
 
-function refreshDistributionIndex(remote, onSuccess, onError){
-    if(remote){
-        DistroManager.pullRemote()
-            .then(onSuccess)
-            .catch(onError)
-    } else {
-        DistroManager.pullLocal()
-            .then(onSuccess)
-            .catch(onError)
-    }
-}
+// function refreshDistributionIndex(remote, onSuccess, onError){
+//     if(remote){
+//         DistroManager.pullRemote()
+//             .then(onSuccess)
+//             .catch(onError)
+//     } else {
+//         DistroManager.pullLocal()
+//             .then(onSuccess)
+//             .catch(onError)
+//     }
+// }
 
 async function validateSelectedAccount(){
     const selectedAcc = ConfigManager.getSelectedAccount()
@@ -343,13 +364,17 @@ async function validateSelectedAccount(){
                 }
                 toggleOverlay(false)
                 switchView(getCurrentView(), VIEWS.login)
+                if(hasRPC){
+                    DiscordWrapper.updateDetails('Ajoute un compte...')
+                    DiscordWrapper.clearState()
+                }
             })
             setDismissHandler(() => {
                 if(accLen > 1){
                     prepareAccountSelectionList()
-                    $('#overlayContent').fadeOut(250, () => {
+                    $('#overlayContent').fadeOut(150, () => {
                         bindOverlayKeys(true, 'accountSelectContent', true)
-                        $('#accountSelectContent').fadeIn(250)
+                        $('#accountSelectContent').fadeIn(150)
                     })
                 } else {
                     const accountsObj = ConfigManager.getAuthAccounts()
@@ -415,5 +440,25 @@ ipcRenderer.on('distributionIndexDone', (event, res) => {
         } else {
             rscShouldLoad = true
         }
+    }
+})
+
+ipcRenderer.on('cachedDistributionNotification', (event, res) => {
+    if(res) {
+        setTimeout(() => {
+            setOverlayContent(
+                'Attention: Démarrage de la distribution en cache',
+                'Nous n’avons pas été en mesure de récupérer les dernières informations du serveur sur internet au démarrage, nous avons donc utilisé une version précédemment stockée à la place.<br><br>Ce n’est pas recommandé, et vous devriez redémarrer votre client pour corriger cela afin d’éviter que vos fichiers modpack ne soient obsolètes. Si vous souhaitez continuer à utiliser le lanceur, vous pouvez réessayer à tout moment en appuyant sur le bouton de rafraîchissement de l’écran d’accueil.<br><br>Si cela continue de se produire, et vous n’êtes pas trop sûr pourquoi, venez nous voir sur Discord!',
+                'Compris.',
+                'Rejoindre notre Discord'
+            )
+            setOverlayHandler(() => {
+                toggleOverlay(false)
+            })
+            setDismissHandler(() => {
+                shell.openExternal('https://discord.gg/dymensia')
+            })
+            toggleOverlay(true, true)
+        }, 2000)
     }
 })

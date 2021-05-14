@@ -46,10 +46,10 @@ builder.build({
         },
         linux: {
             target: 'AppImage',
-            maintainer: 'Daniel Scalzi',
-            vendor: 'Daniel Scalzi',
+            maintainer: 'Zapto',
+            vendor: 'Dymensia Team',
             synopsis: 'Modded Minecraft Launcher',
-            description: 'Custom launcher which allows users to join modded servers. All mods, configurations, and updates are handled automatically.',
+            description: 'Custom launcher which allows users to join our modded servers. All mods, configurations, and updates are handled automatically.',
             category: 'Game'
         },
         compression: 'maximum',

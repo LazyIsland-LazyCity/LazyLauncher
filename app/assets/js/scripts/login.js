@@ -17,6 +17,7 @@ const checkmarkContainer    = document.getElementById('checkmarkContainer')
 const loginRememberOption   = document.getElementById('loginRememberOption')
 const loginButton           = document.getElementById('loginButton')
 const loginForm             = document.getElementById('loginForm')
+const loginMSButton         = document.getElementById('loginMSButton')
 
 // Control variables.
 let lu = false, lp = false
@@ -248,6 +249,22 @@ loginCancelButton.onclick = (e) => {
             loginViewCancelHandler()
             loginViewCancelHandler = null
         }
+        if(loginViewOnSuccess === VIEWS.settings){
+            if(hasRPC){
+                DiscordWrapper.updateDetails('Dans les paramètres...')
+                DiscordWrapper.clearState()
+            }
+        } else {
+            if(hasRPC){
+                if(ConfigManager.getSelectedServer()){
+                    const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+                    DiscordWrapper.updateDetails('Prêt à jouer!')
+                    DiscordWrapper.updateState('Serveur: ' + serv.getName())
+                } else {
+                    DiscordWrapper.updateDetails('Écran d\'accueil...')
+                }
+            }
+        }
     })
 }
 
@@ -268,10 +285,24 @@ loginButton.addEventListener('click', () => {
         $('.circle-loader').toggleClass('load-complete')
         $('.checkmark').toggle()
         setTimeout(() => {
-            switchView(VIEWS.login, loginViewOnSuccess, 500, 500, () => {
+            switchView(VIEWS.login, loginViewOnSuccess, 250, 250, () => {
                 // Temporary workaround
                 if(loginViewOnSuccess === VIEWS.settings){
                     prepareSettings()
+                    if(hasRPC){
+                        DiscordWrapper.updateDetails('Dans les paramètres...')
+                        DiscordWrapper.clearState()
+                    }
+                } else {
+                    if(hasRPC){
+                        if(ConfigManager.getSelectedServer()){
+                            const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
+                            DiscordWrapper.updateDetails('Prêt à jouer!')
+                            DiscordWrapper.updateState('Serveur: ' + serv.getName())
+                        } else {
+                            DiscordWrapper.updateDetails('Écran d\'accueil...')
+                        }
+                    }
                 }
                 loginViewOnSuccess = VIEWS.landing // Reset this for good measure.
                 loginCancelEnabled(false) // Reset this for good measure.
@@ -295,6 +326,100 @@ loginButton.addEventListener('click', () => {
         })
         toggleOverlay(true)
         loggerLogin.log('Error while logging in.', err)
+    })
+
+})
+
+loginMSButton.addEventListener('click', (event) => {
+    // Show loading stuff.
+    toggleOverlay(true, false, 'msOverlay')
+    loginMSButton.disabled = true
+    ipcRenderer.send('openMSALoginWindow', 'open')
+})
+
+ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
+    if (args[0] === 'error') {
+        
+        loginMSButton.disabled = false
+        loginLoading(false)
+        switch (args[1]){
+            case 'AlreadyOpenException': {
+                setOverlayContent('ERREUR', 'Une fenêtre de connexion est déjà ouverte !', 'OK')
+                setOverlayHandler(() => {
+                    toggleOverlay(false)
+                    toggleOverlay(false, false, 'msOverlay')
+                })
+                toggleOverlay(true)
+                return
+            }
+            case 'AuthNotFinished': {
+                setOverlayContent('ERREUR', 'Vous devez terminer le processus de connexion pour utiliser le launcher Dymensia. La fenêtre se fermera toute seule lorsque vous aurez ouvert une session avec succès.', 'OK')
+                setOverlayHandler(() => {
+                    toggleOverlay(false)
+                    toggleOverlay(false, false, 'msOverlay')
+                })
+                toggleOverlay(true)
+                return
+            }
+        }
+        
+    }
+    toggleOverlay(false, false, 'msOverlay')
+    const queryMap = args[0]
+    if (queryMap.has('error')) {
+        let error = queryMap.get('error')
+        let errorDesc = queryMap.get('error_description')
+        if(error === 'access_denied'){
+            error = 'ERRPR'
+            errorDesc = 'Pour utiliser notre launcher, vous devez accepter les autorisations requises, sinon vous ne pouvez pas utiliser ce launcher avec des comptes Microsoft.<br><br>Malgré l’acceptation des permissions, vous ne nous donnez pas la possibilité de faire quoi que ce soit avec votre compte, car toutes les données vous seront toujours renvoyées (le launcher).'
+        }        
+        setOverlayContent(error, errorDesc, 'OK')
+        setOverlayHandler(() => {
+            loginMSButton.disabled = false
+            toggleOverlay(false)
+        })
+        toggleOverlay(true)
+        return
+    }
+
+    // Disable form.
+    formDisabled(true)
+
+    const authCode = queryMap.get('code')
+    AuthManager.addMSAccount(authCode).then(account => {
+        updateSelectedAccount(account)
+        loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.loggingIn'), Lang.queryJS('login.success'))
+        $('.circle-loader').toggleClass('load-complete')
+        $('.checkmark').toggle()
+        setTimeout(() => {
+            switchView(VIEWS.login, loginViewOnSuccess, 500, 500, () => {
+                // Temporary workaround
+                if (loginViewOnSuccess === VIEWS.settings) {
+                    prepareSettings()
+                }
+                loginViewOnSuccess = VIEWS.landing // Reset this for good measure.
+                loginCancelEnabled(false) // Reset this for good measure.
+                loginViewCancelHandler = null // Reset this for good measure.
+                loginUsername.value = ''
+                loginPassword.value = ''
+                $('.circle-loader').toggleClass('load-complete')
+                $('.checkmark').toggle()
+                loginLoading(false)
+                loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.success'), Lang.queryJS('login.login'))
+                formDisabled(false)
+            })
+            toggleOverlay(false)
+        }, 1000)
+    }).catch(error => {
+        loginMSButton.disabled = false
+        loginLoading(false)
+        setOverlayContent('ERREUR', error.message ? error.message : 'Une erreur s’est produite lors de la connexion avec Microsoft ! Pour plus d’informations, veuillez consulter les logs. Vous pouvez les ouvrir avec CTRL + SHIFT + I.', Lang.queryJS('login.tryAgain'))
+        setOverlayHandler(() => {
+            formDisabled(false)
+            toggleOverlay(false)
+        })
+        toggleOverlay(true)
+        loggerLogin.error(error)
     })
 
 })

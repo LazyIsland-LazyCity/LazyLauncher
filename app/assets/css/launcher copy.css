@@ -300,7 +300,7 @@ body, button {
 }
 
 #welcomeDescription a {
-    color: #adadad;
+    color: #7289da;
     font-weight: bold;
     text-decoration: none;
 }
@@ -331,7 +331,7 @@ body, button {
     display: flex;
     align-items: center;
     font-size: 28px;
-    color: #adadad
+    color: #7289da
 }
 
 #welcomeButton:disabled {
@@ -3652,16 +3652,16 @@ input:checked + .toggleSwitchSlider:before {
     padding: 0px;
     transition: 0.25s ease;
     outline: none;
-    color: #adadad
+    color: #7289da
 }
 #launch_button:hover,
 #launch_button:focus {
-    color: #cccccc
+
 }
 #launch_button:active {
 }
 #launch_button:disabled {
-    color: #8b8b8b;
+    color: #c7c7c7;
     cursor: default;
     pointer-events: none;
 }
@@ -3701,7 +3701,7 @@ input:checked + .toggleSwitchSlider:before {
     font-size: 32px;
     background: none;
     border: none;
-    border-bottom: 2px #b700ff double;
+    border-bottom: 2px #ff0066 double;
     outline: none;
     cursor: pointer;
     line-height: 24px;

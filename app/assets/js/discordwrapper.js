@@ -5,24 +5,25 @@ const {Client} = require('discord-rpc')
 
 let client
 let activity
-var connected_players = 0
-var maximum_players = 0
 
-exports.initRPC = function(genSettings, servSettings, initialDetails = 'En jeu'){
+exports.initRPC = function(genSettings, servSettings = null, initialDetails = 'En jeu'){
+    logger.log('Now Loading Discord RPC')
     client = new Client({ transport: 'ipc' })
 
     activity = {
         details: initialDetails,
-        state: 'Serveur: ' + servSettings.shortId,
-        largeImageKey: servSettings.largeImageKey,
-        largeImageText: servSettings.largeImageText,
-        smallImageKey: genSettings.smallImageKey,
-        smallImageText: genSettings.smallImageText,
-        startTimestamp: new Date().getTime(),
-        instance: false,
-        partyId: servSettings.shortId,
-        partySize: connected_players,
-        partyMax: maximum_players,        
+        state: 'En jeu',
+        // largeImageKey: servSettings.largeImageKey,
+        // largeImageText: servSettings.largeImageText,
+        // smallImageKey: genSettings.smallImageKey,
+        // smallImageText: genSettings.smallImageText,
+        // startTimestamp: new Date().getTime(),
+        // instance: false,
+        partyId: "Dymensia",
+        partySize: 64,
+        partyMax: 64,        
+        // partySize: connected_players,
+        // partyMax: maximum_players,        
         buttons: [
             { label: "Rejoindre", url: "https://launcher.dymensia.fr/" },
             { label: "Discord", url: "https://discord.gg/dBhx3kjtaJ" }
@@ -43,17 +44,56 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = 'En jeu')
     })
 }
 
-exports.updateDetails = function(details){
-    activity.details = details
-    activity.partySize = connected_players,
-    activity.partyMax = maximum_players,        
-    client.setActivity(activity)
+exports.updateState = function(state){
+    if(client){
+        activity.state = state
+        client.setActivity(activity)
+        logger.log('Updated discord state to: ' + state)
+    }
 }
 
-exports.updateParty = function(connected, maximum){
-    activity.partySize = Number(connected),
-    activity.partyMax = Number(maximum),        
+exports.clearState = function(){
+    if(client){
+        activity = {
+            details: activity.details,
+            largeImageKey: activity.largeImageKey,
+            largeImageText: activity.largeImageText,
+            startTimestamp: activity.startTimestamp,
+            instance: activity.instance
+        }
+        client.setActivity(activity)
+        logger.log('Cleared the activity state!')
+    }
+}
+
+exports.updateDetails = function(details){
+    if(client){
+        activity.details = details
+    // activity.partySize = connected_players,
+    // activity.partyMax = maximum_players,        
     client.setActivity(activity)
+    }
+}
+
+exports.clearDetails = function(){
+    if(client){
+        activity = {
+            state: activity.state,
+            largeImageKey: activity.largeImageKey,
+            largeImageText: activity.largeImageText,
+            startTimestamp: activity.startTimestamp,
+            instance: activity.instance
+        }
+        logger.log('Cleared the activity details!')
+    }
+}
+
+exports.resetTime = function(){
+    if(client){
+        activity.startTimestamp = new Date().getTime()
+        client.setActivity(activity)
+        logger.log('Reset the activity time!')
+    }
 }
 
 exports.shutdownRPC = function(){
@@ -62,4 +102,8 @@ exports.shutdownRPC = function(){
     client.destroy()
     client = null
     activity = null
+}
+
+exports.getClient = function(){
+    return client
 }
