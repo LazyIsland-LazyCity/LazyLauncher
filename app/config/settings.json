@@ -7,13 +7,13 @@
 
   "WEBSITE_ENABLE": true,
   "WEBSITE_URL": "https://launcher.dymensia.fr/",
-  "TWITTER_ENABLE": true,
+  "TWITTER_ENABLE": false,
   "TWITTER_URL": "https://twitter.com/Dymensia_",
   "INSTAGRAM_ENABLE": false,
   "INSTAGRAM_URL": "#",
   "YOUTUBE_ENABLE": false,
   "YOUTUBE_URL": "#",
   "DISCORD_ENABLE": true,
-  "DISCORD_URL": "https://discord.gg/dymensia"
+  "DISCORD_URL": "https://discord.lazycity.fr"
 
 }
