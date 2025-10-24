@@ -1,13 +1,13 @@
 {
-  "name": "dymensialauncher",
+  "name": "lazylauncher",
   "version": "2.0.0",
-  "productName": "DymensiaLauncher",
-  "description": "Launcher Minecraft de Dymensia",
-  "author": "Dymensia",
-  "license": "UNLICENSED",
-  "homepage": "https://github.com/Dymensia/DymensiaLauncher",
+  "productName": "LazyLauncher",
+  "description": "Launcher Minecraft de LazyIsland",
+  "author": "LazyIsland Team",
+  "license": "GPL-3.0 license",
+  "homepage": "https://github.com/LazyIsland-LazyCity/LazyLauncher",
   "bugs": {
-    "url": "https://github.com/Dymensia/DymensiaLauncher/issues"
+    "url": "https://github.com/LazyIsland-LazyCity/LazyLauncher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -52,6 +52,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dymensia/DymensiaLauncher.git"
+    "url": "git+https://github.com/LazyIsland-LazyCity/LazyLauncher.git"
   }
 }

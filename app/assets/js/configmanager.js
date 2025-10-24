@@ -6,7 +6,7 @@ const constants = require('../../config/constants')
 const logger = require('./loggerutil')('%c[ConfigManager]', 'color: #a02d2a; font-weight: bold')
 
 const sysRoot = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
-const dataPath = path.join(sysRoot, '.dymensia')
+const dataPath = path.join(sysRoot, '.lazycity')
 
 // const dataPath = process.env.HOME.concat('/'+constants.APP_DATA_NAME)
 

@@ -180,7 +180,7 @@ document.getElementById('refreshMediaButton').onclick = (e) => {
             toggleOverlay(false)
         })
         setDismissHandler(() => {
-            shell.openExternal('https://discord.gg/dymensia')
+            shell.openExternal('https://discord.lazycity.fr')
         })
         toggleOverlay(true, true)
         ele.removeAttribute('inprogress')
@@ -303,7 +303,7 @@ const refreshMojangStatuses = async function(){
 }
 
 const refreshModRealmsStatuses = async function(){
-    loggerLanding.log('Refreshing Dymensia Statuses..')
+    loggerLanding.log('Refreshing LazyCity Statuses..')
     let status = 'grey'
     let tooltipServerHTML = ''
     let greenCount = 0
@@ -468,7 +468,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                 // Show this information to the user.
                 setOverlayContent(
                     'Aucune installation<br>Java compatible trouvée',
-                    'Pour rejoindre Dymensia, vous avez besoin d\'une installation 64 bits de Java 8. Souhaitez-vous que nous en installions une copie? En installant, vous acceptez<a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">le contrat de licence d\'Oracle</a>.',
+                    'Pour rejoindre LazyIsland, vous avez besoin d\'une installation 64 bits de Java 8. Souhaitez-vous que nous en installions une copie? En installant, vous acceptez<a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">le contrat de licence d\'Oracle</a>.',
                     'Installer Java',
                     'Installer manuellement'
                 )
@@ -840,7 +840,7 @@ function dlAsync(login = true){
                         shell.showItemInFolder(path)
                         setOverlayContent(
                             'Le jeu a crash!',
-                            'Oh Oh! On dirait que votre jeu vient de crash. Nous avons ouvert le dossier des rapports de crashs afin que vous puissiez facilement le partager avec notre équipe sur Discord. Si vous avez des crashs répétées, nous vous recommandons toujours de venir nous voir sur <a href="https://discord.gg/dymensia">Discord!</a><br><br>Pour une référence future, l’emplacement du fichier de rapport de plantage est: <br>' + path,
+                            'Oh Oh! On dirait que votre jeu vient de crash. Nous avons ouvert le dossier des rapports de crashs afin que vous puissiez facilement le partager avec notre équipe sur Discord. Si vous avez des crashs répétées, nous vous recommandons toujours de venir nous voir sur <a href="https://discord.lazycity.fr">Discord!</a><br><br>Pour une référence future, l’emplacement du fichier de rapport de plantage est: <br>' + path,
                             'OK, merci!',
                             'Ouvrir le rapport de crash'
                         )
@@ -865,7 +865,7 @@ function dlAsync(login = true){
                         let LOG_FILE = path.join(ConfigManager.getInstanceDirectory(), serv.getID(), 'logs', 'latest.log')
                         setOverlayContent(
                             'Erreur pendant le lancement!',
-                            'Il semble que votre client n’a pas été en mesure de lancer au-delà du point où le client s’ouvre et les rapports de plantage peuvent être générés. Une cause commune de cela peut être une colision entre les mods au début du lancement.<br><br>Si vous avez installé des mods personnalisés, désactivez-les et réessayez de les lancer.<br><br>Si ce problème persiste, veuillez télécharger votre latest.log dans un <a href="https://ptero.co">pastebin</a> et laissez-le nous sur notre serveur <a href="https://discord.gg/dymensia">Discord</a> !',
+                            'Il semble que votre client n’a pas été en mesure de lancer au-delà du point où le client s’ouvre et les rapports de plantage peuvent être générés. Une cause commune de cela peut être une colision entre les mods au début du lancement.<br><br>Si vous avez installé des mods personnalisés, désactivez-les et réessayez de les lancer.<br><br>Si ce problème persiste, veuillez télécharger votre latest.log dans un <a href="https://ptero.co">pastebin</a> et laissez-le nous sur notre serveur <a href="https://discord.lazycity.fr">Discord</a> !',
                             'OK, merci!',
                             'Ouvrir latest.log'
                         )

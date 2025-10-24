@@ -48,7 +48,7 @@ if(!isDev){
                 loggerAutoUpdaterSuccess.log('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/Dymensia/DymensiaLauncher/releases/download/v${info.version}/DymensiaLauncher-setup-${info.version}.dmg`
+                    info.darwindownload = `https://github.com/LazyIsland-LazyCity/LazyLauncher/releases/download/v${info.version}/LazyIslandLauncher-setup-${info.version}.dmg`
                     showUpdateUI(info)
                 }
                 

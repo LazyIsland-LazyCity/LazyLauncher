@@ -1449,7 +1449,7 @@ function populateAboutVersionInformation() {
  */
 function populateReleaseNotes() {
     $.ajax({
-        url: 'https://github.com/Dymensia/DymensiaLauncher/releases.atom',
+        url: 'https://github.com/LazyIsland-LazyCity/LazyLauncher/releases.atom',
         success: (data) => {
             const version = 'v' + remote.app.getVersion()
             const entries = $(data).find('entry')

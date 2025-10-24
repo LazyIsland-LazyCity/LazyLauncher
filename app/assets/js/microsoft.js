@@ -78,7 +78,7 @@ function getXSTSToken(XBLToken) {
         
                     case 2148916238: 
                         reject({
-                            message: 'Comme vous n’avez pas encore 18 ans, un adulte doit vous ajouter à une famille afin que vous puissiez utiliser Dymensia Launcher!'
+                            message: 'Comme vous n’avez pas encore 18 ans, un adulte doit vous ajouter à une famille afin que vous puissiez utiliser LazyIsland Launcher!'
                         })
                         return
                 }

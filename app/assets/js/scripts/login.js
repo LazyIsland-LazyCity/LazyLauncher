@@ -353,7 +353,7 @@ ipcRenderer.on('MSALoginWindowReply', (event, ...args) => {
                 return
             }
             case 'AuthNotFinished': {
-                setOverlayContent('ERREUR', 'Vous devez terminer le processus de connexion pour utiliser le launcher Dymensia. La fenêtre se fermera toute seule lorsque vous aurez ouvert une session avec succès.', 'OK')
+                setOverlayContent('ERREUR', 'Vous devez terminer le processus de connexion pour utiliser le launcher LazyIsland. La fenêtre se fermera toute seule lorsque vous aurez ouvert une session avec succès.', 'OK')
                 setOverlayHandler(() => {
                     toggleOverlay(false)
                     toggleOverlay(false, false, 'msOverlay')

@@ -128,15 +128,15 @@ function showFatalStartupError(){
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
                 'Erreur Fatale: Impossible de charger l’indice de distribution',
-                'Aucune connexion n’a pu être établie avec nos serveurs pour télécharger l’index de distribution. Aucune copie locale n’était disponible pour le chargement. <br><br>L’index de distribution est un fichier essentiel qui fournit les dernières informations du serveur. Le launcher ne peut pas démarrer sans. Assurez-vous d’être connecté à Internet et relancez l’application. <br><br>Il est très possible que le launcher ait mis à jour et changé l’emplacement du fichier d’index de distribution. Nous vous recommandons d’installer la dernière version du lanceur à partir de notre page de versions. <br><br>Si vous continuez à avoir des problèmes, veuillez nous contacter sur le serveur Discord Dymensia..',
+                'Aucune connexion n’a pu être établie avec nos serveurs pour télécharger l’index de distribution. Aucune copie locale n’était disponible pour le chargement. <br><br>L’index de distribution est un fichier essentiel qui fournit les dernières informations du serveur. Le launcher ne peut pas démarrer sans. Assurez-vous d’être connecté à Internet et relancez l’application. <br><br>Il est très possible que le launcher ait mis à jour et changé l’emplacement du fichier d’index de distribution. Nous vous recommandons d’installer la dernière version du lanceur à partir de notre page de versions. <br><br>Si vous continuez à avoir des problèmes, veuillez nous contacter sur le serveur Discord LazyCity..',
                 'Télécharger la dernière version',
                 'Rejoindre notre Discord'
             )
             setOverlayHandler(() => {
-                shell.openExternal('https://github.com/dymensia/DymensiaLauncher/releases')
+                shell.openExternal('https://github.com/LazyIsland-LazyCity/LazyLauncher/releases')
             })
             setDismissHandler(() => {
-                shell.openExternal('https://discord.gg/dymensia')
+                shell.openExternal('https://discord.lazycity.fr')
             })
             toggleOverlay(true, true)
         })
@@ -456,7 +456,7 @@ ipcRenderer.on('cachedDistributionNotification', (event, res) => {
                 toggleOverlay(false)
             })
             setDismissHandler(() => {
-                shell.openExternal('https://discord.gg/dymensia')
+                shell.openExternal('https://discord.lazycity.fr')
             })
             toggleOverlay(true, true)
         }, 2000)

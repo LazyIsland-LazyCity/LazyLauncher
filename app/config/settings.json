@@ -6,7 +6,7 @@
   "WELCOME_DESC_CTA": "N/A",
 
   "WEBSITE_ENABLE": true,
-  "WEBSITE_URL": "https://launcher.dymensia.fr/",
+  "WEBSITE_URL": "https://lazycity.fr/",
   "TWITTER_ENABLE": false,
   "TWITTER_URL": "https://twitter.com/Dymensia_",
   "INSTAGRAM_ENABLE": false,
@@ -14,6 +14,8 @@
   "YOUTUBE_ENABLE": false,
   "YOUTUBE_URL": "#",
   "DISCORD_ENABLE": true,
-  "DISCORD_URL": "https://discord.lazycity.fr"
+  "DISCORD_URL": "https://discord.lazycity.fr",
+  "TIKTOK_ENABLE": true,
+  "TIKTOK_URL": "https://www.tiktok.com/@lazy.city.rp"
 
 }

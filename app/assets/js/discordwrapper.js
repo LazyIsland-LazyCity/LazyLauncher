@@ -19,14 +19,14 @@ exports.initRPC = function(genSettings, servSettings = null, initialDetails = 'E
         // smallImageText: genSettings.smallImageText,
         // startTimestamp: new Date().getTime(),
         // instance: false,
-        partyId: "Dymensia",
+        partyId: "LazyIsland",
         partySize: 64,
         partyMax: 64,        
         // partySize: connected_players,
         // partyMax: maximum_players,        
         buttons: [
-            { label: "Rejoindre", url: "https://launcher.dymensia.fr/" },
-            { label: "Discord", url: "https://discord.gg/dBhx3kjtaJ" }
+            { label: "Rejoindre", url: "https://lazycity.fr/" },
+            { label: "Discord", url: "https://discord.lazycity.fr" }
         ]
     }
 
